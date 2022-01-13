@@ -3,11 +3,12 @@ import javax.naming.Name
 fun main(args: Array<String>) {
     var People = ArrayList<Person>()
     var Answer: Int
-    var Surname: String
+    var FirstName: String
     var LastName: String
     var Number: String
     var Email: String
     var StayInLoop = true
+    var ContinueInLoop = true
 
     do{
         println("What would you like to do?")
@@ -15,23 +16,23 @@ fun main(args: Array<String>) {
         when(readln().toInt()){
             1 -> {
                 println("What is the person's surname?")
-                Surname = readln()
+                FirstName = readln()
                 println("What is the person's last name?")
                 LastName = readln()
                 println("What is the individual's phone number?")
                 Number = readln()
                 println("And lastly, what is the individual's email?")
                 Email = readln()
-                People.add(Person(Surname, LastName, Number, Email))
+                People.add(Person(FirstName, LastName, Number, Email))
             }
             2 ->{
                 println("Please type in the individual's surname")
-                var TempSurname: String = readln()
+                var TempFirstName: String = readln()
                 println("And please type in the individual's lastname")
                 var TempLastName: String = readln()
                 var TempIndex: Int = 0
-                for(x in People){
-                    if(People[TempIndex].Surname.uppercase()==TempSurname.uppercase() && People[TempIndex].LastName.uppercase()==TempLastName.uppercase()){
+                for(Person in People){
+                    if(Person.FirstName.uppercase() == TempFirstName.uppercase() && Person.LastName.uppercase() == TempLastName.uppercase()){
                         People.removeAt(TempIndex)
                         println("The individual has successfully been removed from the contact list")
                         break
@@ -41,12 +42,35 @@ fun main(args: Array<String>) {
                 println("The person was unfortunately not found, perhaps you misspelled their surname and/or lastname")
             }
             3 ->{
-
+                var TempIndex: Int = 1
+                for(Person in People){
+                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + ", Email: " + Person.Email)
+                    TempIndex += 1
+                }
+                TempIndex = 0
+                println("What is the first and last name of the contact that you would like to edit?")
+                var Answer = readln()
+                for(Person in People){
+                    if(Person.FirstName.uppercase() == Answer.substring(0).uppercase() && Person.LastName.uppercase() == Answer.substring(1).uppercase()){
+                        do{
+                            println("What would you like to change?")
+                            println(" 1. Change first name.\n 2. Change last name.\n 3. Change phone number\n 4. Change email address.")
+                            when(readln().toInt())
+                            {
+                                1 ->{
+                                    }
+                                }
+                            }
+                        }while(ContinueInLoop == true)
+                    }
+                    TempIndex += 1
+                }
             }
             4 ->{
-                var TempIndex: Int = 0
-                for(x in People){
-                    println(People[TempIndex])
+                var TempIndex: Int = 1
+                for(Person in People){
+                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + ", Email: " + Person.Email)
+                    TempIndex += 1
                 }
             }
             5 ->{
@@ -77,4 +101,4 @@ fun main(args: Array<String>) {
     println("Program arguments: ${args.joinToString()}")
 }
 
-class Person(var Surname: String, var LastName: String, var Number: String, var Email: String)
+class Person(var FirstName: String, var LastName: String, var Number: String, var Email: String)
