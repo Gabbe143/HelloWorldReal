@@ -49,19 +49,39 @@ fun main(args: Array<String>) {
                 }
                 TempIndex = 0
                 println("What is the first and last name of the contact that you would like to edit?")
-                var Answer = readln()
+                var FirstnameAndLastname = readln()
                 for(Person in People){
-                    if(Person.FirstName.uppercase() == Answer.substring(0).uppercase() && Person.LastName.uppercase() == Answer.substring(1).uppercase()){
+                    if(Person.FirstName.uppercase() == FirstnameAndLastname.substring(0, 1).uppercase() && Person.LastName.uppercase() == FirstnameAndLastname.substring(2,3).uppercase()){
                         do{
                             println("What would you like to change?")
                             println(" 1. Change first name.\n 2. Change last name.\n 3. Change phone number\n 4. Change email address.")
                             when(readln().toInt())
                             {
-                                1 ->{
-                                    }
+                                1 -> {
+                                    println("What would you like the new first name to be?")
+                                    Person.FirstName = readln()
+                                    ContinueInLoop = false
+                                }
+                                2 -> {
+                                    println("What would you like the new last name to be?")
+                                    Person.LastName = readln()
+                                    ContinueInLoop = false
+                                }
+                                3 -> {
+                                    println("What would you like the new phone number to be?")
+                                    Person.Number = readln()
+                                    ContinueInLoop = false
+                                }
+                                4 -> {
+                                    println("What would you like the new email address to be?")
+                                    Person.Email = readln()
+                                    ContinueInLoop = false
+                                }
+                                else -> {
+                                    println("You have typed a invalid number, try again!")
                                 }
                             }
-                        }while(ContinueInLoop == true)
+                        }while(ContinueInLoop)
                     }
                     TempIndex += 1
                 }
