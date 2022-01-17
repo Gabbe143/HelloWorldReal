@@ -108,7 +108,7 @@ fun main(args: Array<String>) {
 
             }
             6 ->{
-                println("test")
+                println("")
             }
             7 ->{
 
