@@ -1,3 +1,4 @@
+import java.io.PrintWriter
 import javax.naming.Name
 
 fun main(args: Array<String>) {
@@ -108,7 +109,8 @@ fun main(args: Array<String>) {
 
             }
             6 ->{
-                println("")
+                WriteToFile(People)
+                println("The contacts have successfully been saved in Contacts.txt!")
             }
             7 ->{
 
@@ -122,13 +124,19 @@ fun main(args: Array<String>) {
         }
     }while(StayInLoop)
     println("You have successfully turned off the application, all of the contacts will be automatically saved.")
-
-
-
-
-
     // Try adding program arguments via Run/Debug configuration.
     // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
     println("Program arguments: ${args.joinToString()}")
 }
 class Person(var FirstName: String, var LastName: String, var Number: String, var Email: String)
+
+fun WriteToFile(People: ArrayList<Person>) {
+    val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // java.io.PrintWriter
+    for (Person in People) {
+        writer.write("FirstName: ${Person.FirstName}, LastName: ${Person.LastName}, Number: ${Person.Number}, Email: ${Person.Email}\n")
+    }
+    writer.close()
+}
+fun WriteFromFile(){
+
+}
