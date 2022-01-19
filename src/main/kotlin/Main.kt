@@ -1,5 +1,7 @@
+import java.io.BufferedReader
 import java.io.PrintWriter
-import javax.naming.Name
+import java.io.File
+import java.io.InputStream
 
 fun main(args: Array<String>) {
     var People = ArrayList<Person>()
@@ -113,7 +115,8 @@ fun main(args: Array<String>) {
                 println("The contacts have successfully been saved in Contacts.txt!")
             }
             7 ->{
-
+                WriteFromFile(People)
+                println("Your contacts have successfully been loaded in!")
             }
             8 ->{
                 StayInLoop = false
@@ -133,10 +136,17 @@ class Person(var FirstName: String, var LastName: String, var Number: String, va
 fun WriteToFile(People: ArrayList<Person>) {
     val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // java.io.PrintWriter
     for (Person in People) {
-        writer.write("FirstName: ${Person.FirstName}, LastName: ${Person.LastName}, Number: ${Person.Number}, Email: ${Person.Email}\n")
+        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number} Email: ${Person.Email}\n")
     }
     writer.close()
 }
-fun WriteFromFile(){
-
+fun WriteFromFile(People: ArrayList<Person> /* = java.util.ArrayList<Person> */){
+    val inputStream: InputStream = File("src/main/kotlin/Contacts.txt").inputStream()
+    inputStream.bufferedReader().forEachLine {
+        if(it.startsWith("Person: "))
+        {
+            People.add(Person(it.substring(0),it.substring(3,4), it.substring(5,6), it.substring(7,8))) //FirstName, LastName, Number, Mail
+        }
+    }
+    //People.add(FirstName, LastName, Number, Email)
 }
