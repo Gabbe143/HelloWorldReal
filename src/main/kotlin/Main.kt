@@ -1,4 +1,3 @@
-import java.io.BufferedReader
 import java.io.PrintWriter
 import java.io.File
 import java.io.InputStream
@@ -16,32 +15,32 @@ fun main(args: Array<String>) {
     do{
         println("What would you like to do?")
         println(" 1. Add an individual to the contact list.\n 2. Remove a contact.\n 3. Edit a contact.\n 4. Show the whole contact list.\n 5. Show the contact list in alphabetical order.\n 6. Save the contact list to a file.\n 7. Read in contacts from file.\n 8. Turn off the application\n" )
-        when(readln().toInt()){
+        when(readln().toInt()){ //A switch-case (C#) where the Int input from the user will determine which case they will go into in the code.
             1 -> {
                 println("What is the person's surname?")
-                FirstName = readln()
+                FirstName = readln() //User input
                 println("What is the person's last name?")
-                LastName = readln()
+                LastName = readln() //User input
                 println("What is the individual's phone number?")
-                Number = readln()
+                Number = readln() //User input
                 println("And lastly, what is the individual's email?")
-                Email = readln()
-                People.add(Person(FirstName, LastName, Number, Email))
+                Email = readln() //User input
+                People.add(Person(FirstName, LastName, Number, Email)) //Adds a person into the contact list People.
             }
             2 ->{
                 var TempIndex: Int = 1
                 for(Person in People){
                     println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + ", Email: " + Person.Email)
                     TempIndex += 1
-                }
+                } // Writes out every contact in the contact list.
                 println("Please type in the individual's surname")
                 var TempFirstName: String = readln()
                 println("And please type in the individual's lastname")
                 var TempLastName: String = readln()
                 var SizeOfPeopleList = 1
                 for(Person in People){
-                    if(Person.FirstName.uppercase() == TempFirstName.uppercase() && Person.LastName.uppercase() == TempLastName.uppercase()){
-                        People.removeAt(SizeOfPeopleList-1)
+                    if(Person.FirstName.uppercase() == TempFirstName.uppercase() && Person.LastName.uppercase() == TempLastName.uppercase()){ //Checks each person if there is someone with an identical first and lastname.
+                        People.removeAt(SizeOfPeopleList-1) //If there is, the
                         println("The individual has successfully been removed from the contact list")
                         break
                     }
@@ -115,7 +114,7 @@ fun main(args: Array<String>) {
                 println("The contacts have successfully been saved in Contacts.txt!")
             }
             7 ->{
-                WriteFromFile(People)
+                ReadFromFile(People)
                 println("Your contacts have successfully been loaded in!")
             }
             8 ->{
@@ -134,19 +133,19 @@ fun main(args: Array<String>) {
 class Person(var FirstName: String, var LastName: String, var Number: String, var Email: String)
 
 fun WriteToFile(People: ArrayList<Person>) {
-    val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // java.io.PrintWriter
+    val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // Sets the writer's path
     for (Person in People) {
-        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number} Email: ${Person.Email}\n")
+        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number} Email: ${Person.Email}\n") //Writes out a contact on each line for each person in the people list
     }
-    writer.close()
+    writer.close() //closes/stops the writer
 }
-fun WriteFromFile(People: ArrayList<Person> /* = java.util.ArrayList<Person> */){
+fun ReadFromFile(People: ArrayList<Person>){
     val inputStream: InputStream = File("src/main/kotlin/Contacts.txt").inputStream()
-    inputStream.bufferedReader().forEachLine {
-        if(it.startsWith("Person: "))
+    inputStream.bufferedReader().forEachLine { //Reads through the txt file's content
+        if(it.startsWith("Person: ")) //Checks where a person contact is in the txt file
         {
-            People.add(Person(it.substring(0),it.substring(3,4), it.substring(5,6), it.substring(7,8))) //FirstName, LastName, Number, Mail
+            var Array = it.split(' ')
+            People.add(Person(Array[2],Array[4], Array[6], Array[8])) //People.add(FirstName, LastName, Number, Email) adds
         }
     }
-    //People.add(FirstName, LastName, Number, Email)
 }
