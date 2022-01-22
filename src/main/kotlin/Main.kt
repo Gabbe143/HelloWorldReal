@@ -138,7 +138,7 @@ fun WriteToFile(People: ArrayList<Person>) {
     for (Person in People) {
         writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number} Email: ${Person.Email}\n") //Writes out a contact on each line for each person in the people list
     }
-    writer.close() //closes/stops the writer
+    writer.close() // closes/stops the writer
 }
 fun ReadFromFile(People: ArrayList<Person>){
     val inputStream: InputStream = File("src/main/kotlin/Contacts.txt").inputStream()
