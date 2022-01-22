@@ -1,2 +1,5 @@
-class Contact {
+package main.kotlin;
+
+public class Contact {
+
 }
