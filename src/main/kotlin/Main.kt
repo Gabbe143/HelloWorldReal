@@ -8,7 +8,7 @@ fun main(args: Array<String>) {
     var Answer: Int
     var FirstName: String
     var LastName: String
-    var Number: String
+    var Number = ArrayList<Int>()
     var Email: String
     var StayInLoop = true
     var ContinueInLoop = true
@@ -23,7 +23,7 @@ fun main(args: Array<String>) {
                 println("What is the person's last name?")
                 LastName = readln() //User input
                 println("What is the individual's phone number?")
-                Number = readln() //User input
+                Number.add(readln().toInt()) //User input
                 println("And lastly, what is the individual's email?")
                 Email = readln() //User input
                 People.add(Person(FirstName, LastName, Number, Email)) //Adds a person into the contact list People.
@@ -78,8 +78,14 @@ fun main(args: Array<String>) {
                                     ContinueInLoop = false
                                 }
                                 3 -> {
+                                    for(x in Number){
+
+                                    }
                                     println("What would you like the new phone number to be?")
-                                    Person.Number = readln()
+                                    var i = 1
+                                    for(x in Number) {
+                                        println(""+ i +x)
+                                    }
                                     ContinueInLoop = false
                                 }
                                 4 -> {
@@ -131,7 +137,7 @@ fun main(args: Array<String>) {
     // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
     println("Program arguments: ${args.joinToString()}")
 }
-class Person(var FirstName: String, var LastName: String, var Number: String, var Email: String)
+class Person(var FirstName: String, var LastName: String, var Number: ArrayList<Int>, var Email: String)
 
 fun WriteToFile(People: ArrayList<Person>) {
     val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // Sets the writer's path
