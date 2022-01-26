@@ -1,14 +1,14 @@
-
 import java.io.File
 import java.io.InputStream
 import java.io.PrintWriter
+import javax.lang.model.element.NestingKind
 
 fun main(args: Array<String>) {
     var People = ArrayList<Person>()
     var Answer: Int
     var FirstName: String
     var LastName: String
-    var Number = ArrayList<Int>()
+    var Number = ArrayList<String>()
     var Email: String
     var StayInLoop = true
     var ContinueInLoop = true
@@ -23,7 +23,9 @@ fun main(args: Array<String>) {
                 println("What is the person's last name?")
                 LastName = readln() //User input
                 println("What is the individual's phone number?")
-                Number.add(readln().toInt()) //User input
+                var TempNumber = readln()
+                if()
+                Number.add(readln()) //User input
                 println("And lastly, what is the individual's email?")
                 Email = readln() //User input
                 People.add(Person(FirstName, LastName, Number, Email)) //Adds a person into the contact list People.
@@ -31,7 +33,9 @@ fun main(args: Array<String>) {
             2 ->{
                 var TempIndex: Int = 1
                 for(Person in People){
-                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number.forEach() + ", Email: " + Person.Email)
+                    print("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: ")
+                    Person.Number.forEach{print(it)}
+                    println(", Email: " + Person.Email)
                     TempIndex += 1
                 } // Writes out every contact in the contact list.
                 println("Please type in the individual's surname")
@@ -137,7 +141,7 @@ fun main(args: Array<String>) {
     // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
     println("Program arguments: ${args.joinToString()}")
 }
-class Person(var FirstName: String, var LastName: String, var Number: ArrayList<Int>, var Email: String)
+class Person(var FirstName: String, var LastName: String, var Number: ArrayList<String>, var Email: String)
 
 fun WriteToFile(People: ArrayList<Person>) {
     val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // Sets the writer's path
@@ -155,4 +159,10 @@ fun ReadFromFile(People: ArrayList<Person>){
             //People.add(Person(Array[2],Array[4], Array[6], Array[8])) //People.add(FirstName, LastName, Number, Email) adds
         }
     }
+}
+fun PhoneNumberValidator(PhoneNumber: String): Boolean{
+    if(PhoneNumber.length in 10..13 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toInt() != ){
+        return true
+    }
+    return false
 }
