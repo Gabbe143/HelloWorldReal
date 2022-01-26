@@ -1,7 +1,7 @@
-import main.kotlin.Contact
-import java.io.PrintWriter
+
 import java.io.File
 import java.io.InputStream
+import java.io.PrintWriter
 
 fun main(args: Array<String>) {
     var People = ArrayList<Person>()
@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
             2 ->{
                 var TempIndex: Int = 1
                 for(Person in People){
-                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + ", Email: " + Person.Email)
+                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number.forEach() + ", Email: " + Person.Email)
                     TempIndex += 1
                 } // Writes out every contact in the contact list.
                 println("Please type in the individual's surname")
@@ -152,7 +152,7 @@ fun ReadFromFile(People: ArrayList<Person>){
         if(it.startsWith("Person: ")) //Checks where a person contact is in the txt file
         {
             var Array = it.split(' ')
-            People.add(Person(Array[2],Array[4], Array[6], Array[8])) //People.add(FirstName, LastName, Number, Email) adds
+            //People.add(Person(Array[2],Array[4], Array[6], Array[8])) //People.add(FirstName, LastName, Number, Email) adds
         }
     }
 }
