@@ -1,7 +1,7 @@
+
 import java.io.File
 import java.io.InputStream
 import java.io.PrintWriter
-import javax.lang.model.element.NestingKind
 
 fun main(args: Array<String>) {
     var People = ArrayList<Person>()
@@ -24,8 +24,13 @@ fun main(args: Array<String>) {
                 LastName = readln() //User input
                 println("What is the individual's phone number?")
                 var TempNumber = readln()
-                if()
-                Number.add(readln()) //User input
+                if(PhoneNumberValidator(TempNumber)){
+                    Number.add(readln())
+                } //User input
+                else{
+                    println("You have typed an invalid phone number. The number must be between 10 and 13 numbers, with a (+ international number)")
+                    break
+                }
                 println("And lastly, what is the individual's email?")
                 Email = readln() //User input
                 People.add(Person(FirstName, LastName, Number, Email)) //Adds a person into the contact list People.
@@ -161,7 +166,8 @@ fun ReadFromFile(People: ArrayList<Person>){
     }
 }
 fun PhoneNumberValidator(PhoneNumber: String): Boolean{
-    if(PhoneNumber.length in 10..13 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toInt() != ){
+    if(PhoneNumber.length in 10..13 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toIntOrNull() != null
+    ){
         return true
     }
     return false
