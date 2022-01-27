@@ -29,10 +29,14 @@ fun main(args: Array<String>) {
                 } //User input
                 else{
                     println("You have typed an invalid phone number. The number must be between 10 and 13 numbers, with a (+ international number)")
-                    break
+
                 }
                 println("And lastly, what is the individual's email?")
                 Email = readln() //User input
+                if(Email.contains("[0-9]+"))
+                {
+                    println()
+                }
                 People.add(Person(FirstName, LastName, Number, Email)) //Adds a person into the contact list People.
             }
             2 ->{
