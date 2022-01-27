@@ -22,15 +22,19 @@ fun main(args: Array<String>) {
                 FirstName = readln() //User input
                 println("What is the person's last name?")
                 LastName = readln() //User input
-                println("What is the individual's phone number?")
-                var TempNumber = readln()
-                if(PhoneNumberValidator(TempNumber)){
-                    Number.add(readln())
-                } //User input
-                else{
-                    println("You have typed an invalid phone number. The number must be between 10 and 13 numbers, with a (+ international number)")
+                println("What is the individual's phone number? If they don't have a phone number, then leave it blank.")
+                do {
+                    ContinueInLoop = true
+                    var TempNumber: String = readln() //User input
+                    if(PhoneNumberValidator(TempNumber)){
+                        Number.add(TempNumber)
+                        ContinueInLoop = false
+                    }
+                    else{
+                        println("You have typed an invalid phone number. The number must be between 10 and 13 numbers, with a (+ international number). Please try again")
+                    }
+                }while(ContinueInLoop)
 
-                }
                 println("And lastly, what is the individual's email?")
                 Email = readln() //User input
                 if(Email.contains("[0-9]+"))
@@ -68,7 +72,7 @@ fun main(args: Array<String>) {
             3 ->{
                 var TempIndex: Int = 1
                 for(Person in People) {
-                    println("" + TempIndex + "." + " Firstname: " + Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + ", Email: " + Person.Email)
+                    println("" + TempIndex + "." + " Firstname: " + Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + " Email: " + Person.Email)
                     TempIndex += 1
                 }
                 println("What is the first and last name of the contact that you would like to edit?")
@@ -117,7 +121,7 @@ fun main(args: Array<String>) {
             4 ->{
                 var TempIndex: Int = 1
                 for(Person in People){
-                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + ", Email: " + Person.Email)
+                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number.forEach { print(it) } + ", Email: " + Person.Email)
                     TempIndex += 1
                 }
             }
@@ -170,8 +174,14 @@ fun ReadFromFile(People: ArrayList<Person>){
     }
 }
 fun PhoneNumberValidator(PhoneNumber: String): Boolean{
-    if(PhoneNumber.length in 10..13 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toIntOrNull() != null
-    ){
+    for(Index in 0..PhoneNumber.length-1 )
+    {
+        if(PhoneNumber[Index] == '-')
+        {
+            PhoneNumber.replace('-',' ')
+        }
+    }
+    if((PhoneNumber.length in 8..15 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toIntOrNull() != null) || PhoneNumber.isEmpty()){
         return true
     }
     return false
