@@ -27,7 +27,8 @@ fun main(args: Array<String>) {
                     ContinueInLoop = true
                     var TempNumber: String = readln() //User input
                     if(PhoneNumberValidator(TempNumber)){
-                        Number.add(TempNumber)
+                        val NewNumber = NewPhoneNumberWithoutHyphen(TempNumber)
+                        Number.add(NewNumber)
                         ContinueInLoop = false
                     }
                     else{
@@ -173,16 +174,23 @@ fun ReadFromFile(People: ArrayList<Person>){
         }
     }
 }
-fun PhoneNumberValidator(PhoneNumber: String): Boolean{
-    for(Index in 0..PhoneNumber.length-1 )
-    {
-        if(PhoneNumber[Index] == '-')
+fun PhoneNumberValidator (PhoneNumber: String): Boolean{
+    var NewPhoneNumber = PhoneNumber
+        if(PhoneNumber.contains('-'))
         {
-            PhoneNumber.replace("-","")
+            NewPhoneNumber = PhoneNumber.replace("-","")
         }
-    }
-    if((PhoneNumber.length in 9..13 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toIntOrNull() != null) || PhoneNumber.isEmpty()){
+    if((NewPhoneNumber.length in 9..13 && NewPhoneNumber.substring(0,1) == "+" && NewPhoneNumber.substring(1, NewPhoneNumber.length-1).toIntOrNull() != null) || NewPhoneNumber.isEmpty()){
         return true
     }
     return false
+}
+fun NewPhoneNumberWithoutHyphen(OldPhoneNumber: String): String{
+    var NewPhoneNumber = OldPhoneNumber
+        if(OldPhoneNumber.contains('-'))
+        {
+            NewPhoneNumber = OldPhoneNumber.replace("-","")
+        }
+    }
+    return NewPhoneNumber
 }
