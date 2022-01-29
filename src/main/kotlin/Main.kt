@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
                         ContinueInLoop = false
                     }
                     else{
-                        println("You have typed an invalid phone number. The number must be between 10 and 13 numbers, with a (+ international number). Please try again")
+                        println("You have typed an invalid phone number. The number must be between 8 and 15 numbers, with a (+ international number). Please try again")
                     }
                 }while(ContinueInLoop)
 
@@ -174,10 +174,14 @@ fun ReadFromFile(People: ArrayList<Person>){
     }
 }
 fun PhoneNumberValidator(PhoneNumber: String): Boolean{
-    if(PhoneNumber.contains('-')) {
-        PhoneNumber.replace("-", "")
+    for(Index in 0..PhoneNumber.length-1 )
+    {
+        if(PhoneNumber[Index] == '-')
+        {
+            PhoneNumber.replace("-","")
+        }
     }
-    if((PhoneNumber.length in 8..15 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toIntOrNull() != null) || PhoneNumber.isEmpty()){
+    if((PhoneNumber.length in 9..13 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toIntOrNull() != null) || PhoneNumber.isEmpty()){
         return true
     }
     return false
