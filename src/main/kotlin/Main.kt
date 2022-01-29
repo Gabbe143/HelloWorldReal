@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
     var Email: String
     var StayInLoop = true
     var ContinueInLoop = true
-
+//
     do{
         println("What would you like to do?")
         println(" 1. Add an individual to the contact list.\n 2. Remove a contact.\n 3. Edit a contact.\n 4. Show the whole contact list.\n 5. Show the contact list in alphabetical order.\n 6. Save the contact list to a file.\n 7. Read in contacts from file.\n 8. Turn off the application\n" )
