@@ -174,12 +174,8 @@ fun ReadFromFile(People: ArrayList<Person>){
     }
 }
 fun PhoneNumberValidator(PhoneNumber: String): Boolean{
-    for(Index in 0..PhoneNumber.length-1 )
-    {
-        if(PhoneNumber[Index] == '-')
-        {
-            PhoneNumber.replace('-',' ')
-        }
+    if(PhoneNumber.contains('-')) {
+        PhoneNumber.replace("-", "")
     }
     if((PhoneNumber.length in 8..15 && PhoneNumber.substring(0,1) == "+" && PhoneNumber.substring(1, PhoneNumber.length-1).toIntOrNull() != null) || PhoneNumber.isEmpty()){
         return true
