@@ -1,4 +1,3 @@
-import main.kotlin.Contact
 import java.io.PrintWriter
 import java.io.File
 import java.io.InputStream
