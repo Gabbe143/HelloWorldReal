@@ -1,4 +1,3 @@
-
 import java.io.File
 import java.io.InputStream
 import java.io.PrintWriter
@@ -9,7 +8,7 @@ fun main(args: Array<String>) {
     var FirstName: String
     var LastName: String
     var Number = ArrayList<String>()
-    var Email: String
+    var Email = ArrayList<String>()
     var StayInLoop = true
     var ContinueInLoop = true
 //
@@ -23,12 +22,13 @@ fun main(args: Array<String>) {
                 println("What is the person's last name?")
                 LastName = readln() //User input
                 println("What is the individual's phone number? If they don't have a phone number, then leave it blank.")
+                var TempListOfNumbers = ArrayList<String>()
                 do {
                     ContinueInLoop = true
                     var TempNumber: String = readln() //User input
                     if(PhoneNumberValidator(TempNumber)){
                         val NewNumber = NewPhoneNumberWithoutHyphen(TempNumber)
-                        Number.add(NewNumber)
+                        TempListOfNumbers.add(NewNumber)
                         ContinueInLoop = false
                     }
                     else{
@@ -37,12 +37,12 @@ fun main(args: Array<String>) {
                 }while(ContinueInLoop)
 
                 println("And lastly, what is the individual's email?")
-                Email = readln() //User input
-                if(Email.contains("[0-9]+"))
+                Email.add(readln()) //User input
+                if(Email.contains("[0-9]+")) //? Check if there are numbers here
                 {
                     println()
                 }
-                People.add(Person(FirstName, LastName, Number, Email)) //Adds a person into the contact list People.
+                People.add(Person(FirstName, LastName, TempListOfNumbers, Email)) //Adds a person into the contact list People.
             }
             2 ->{
                 var TempIndex: Int = 1
@@ -107,6 +107,8 @@ fun main(args: Array<String>) {
                                     ContinueInLoop = false
                                 }
                                 4 -> {
+                                    println("These are the emails in this contact: ")
+                                    for()
                                     println("What would you like the new email address to be?")
                                     Person.Email = readln()
                                     ContinueInLoop = false
@@ -122,7 +124,7 @@ fun main(args: Array<String>) {
             4 ->{
                 var TempIndex: Int = 1
                 for(Person in People){
-                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number.forEach { print(it) } + ", Email: " + Person.Email)
+                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number.forEach{println(it)} + ", Email: " + Person.Email)
                     TempIndex += 1
                 }
             }
@@ -155,12 +157,12 @@ fun main(args: Array<String>) {
     // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
     println("Program arguments: ${args.joinToString()}")
 }
-class Person(var FirstName: String, var LastName: String, var Number: ArrayList<String>, var Email: String)
+class Person(var FirstName: String, var LastName: String, var Number: ArrayList<String>, var Email: ArrayList<String>)
 
 fun WriteToFile(People: ArrayList<Person>) {
     val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // Sets the writer's path
     for (Person in People) {
-        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number} Email: ${Person.Email}\n") //Writes out a contact on each line for each person in the people list
+        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number.forEach{(it)}}  Email: ${Person.Email}\n") //!!!!!!!!!   //Writes out a contact on each line for each person in the people list
     }
     writer.close() // closes/stops the writer
 }
@@ -191,6 +193,5 @@ fun NewPhoneNumberWithoutHyphen(OldPhoneNumber: String): String{
         {
             NewPhoneNumber = OldPhoneNumber.replace("-","")
         }
-    }
     return NewPhoneNumber
 }
