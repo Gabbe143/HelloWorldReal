@@ -1,3 +1,4 @@
+import main.kotlin.Person
 import java.io.File
 import java.io.InputStream
 import java.io.PrintWriter
@@ -108,9 +109,9 @@ fun main(args: Array<String>) {
                                 }
                                 4 -> {
                                     println("These are the emails in this contact: ")
-                                    for()
+                                    //for()
                                     println("What would you like the new email address to be?")
-                                    Person.Email = readln()
+                                    //Person.Email = readln()
                                     ContinueInLoop = false
                                 }
                                 else -> {
@@ -157,22 +158,22 @@ fun main(args: Array<String>) {
     // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
     println("Program arguments: ${args.joinToString()}")
 }
-class Person(var FirstName: String, var LastName: String, var Number: ArrayList<String>, var Email: ArrayList<String>)
+//class Person(var FirstName: String, var LastName: String, var Number: ArrayList<String>, var Email: ArrayList<String>)
 
 fun WriteToFile(People: ArrayList<Person>) {
     val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // Sets the writer's path
     for (Person in People) {
-        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number.forEach{(it)}}  Email: ${Person.Email}\n") //!!!!!!!!!   //Writes out a contact on each line for each person in the people list
+        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number.joinToString()}  Email: ${Person.Email}\n") //!!!!!!!!!   //Writes out a contact on each line for each person in the people list
     }
     writer.close() // closes/stops the writer
 }
 fun ReadFromFile(People: ArrayList<Person>){
     val inputStream: InputStream = File("src/main/kotlin/Contacts.txt").inputStream()
-    inputStream.bufferedReader().forEachLine { //Reads through the txt file's content
+    inputStream.bufferedReader().forEachLine{ //Reads through the txt file's content
         if(it.startsWith("Person: ")) //Checks where a person contact is in the txt file
         {
             var Array = it.split(' ')
-            //People.add(Person(Array[2],Array[4], Array[6], Array[8])) //People.add(FirstName, LastName, Number, Email) adds
+            People.add(Person(Array[2], Array[4], Array[6], Array[8])) //People.add(FirstName, LastName, Number, Email) adds
         }
     }
 }
