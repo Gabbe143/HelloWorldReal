@@ -8,28 +8,26 @@ fun main(args: Array<String>) {
     var Answer: Int
     var FirstName: String
     var LastName: String
-    var Number = ArrayList<String>()
-    var Email = ArrayList<String>()
+    var Number = ArrayList<String>() // NumberS
+    var Email = ArrayList<String>() // EmailS
     var StayInLoop = true
     var ContinueInLoop = true
-//
+
     do{
         println("What would you like to do?")
         println(" 1. Add an individual to the contact list.\n 2. Remove a contact.\n 3. Edit a contact.\n 4. Show the whole contact list.\n 5. Show the contact list in alphabetical order.\n 6. Save the contact list to a file.\n 7. Read in contacts from file.\n 8. Turn off the application\n" )
-        when(readln().toInt()){ //A switch-case (C#) where the Int input from the user will determine which case they will go into in the code.
+        when(readln().toInt()){ //A switch-case where the Int input from the user will determine which case they will go into in the code.
             1 -> {
                 println("What is the person's surname?")
                 FirstName = readln() //User input
                 println("What is the person's last name?")
                 LastName = readln() //User input
                 println("What is the individual's phone number? If they don't have a phone number, then leave it blank.")
-                var TempListOfNumbers = ArrayList<String>()
                 do {
                     ContinueInLoop = true
-                    var TempNumber: String = readln() //User input
-                    if(PhoneNumberValidator(TempNumber)){
-                        val NewNumber = NewPhoneNumberWithoutHyphen(TempNumber)
-                        TempListOfNumbers.add(NewNumber)
+                    var PhoneNumber: String = readln() //User input
+                    if(PhoneNumberValidator(PhoneNumber)){
+                        Number.add(PhoneNumber)
                         ContinueInLoop = false
                     }
                     else{
@@ -39,18 +37,13 @@ fun main(args: Array<String>) {
 
                 println("And lastly, what is the individual's email?")
                 Email.add(readln()) //User input
-                if(Email.contains("[0-9]+")) //? Check if there are numbers here
-                {
-                    println()
-                }
-                People.add(Person(FirstName, LastName, TempListOfNumbers, Email)) //Adds a person into the contact list People.
+
+                People.add(Person(FirstName, LastName, Number, Email)) //Adds a person into the contact list People.
             }
             2 ->{
                 var TempIndex: Int = 1
                 for(Person in People){
-                    print("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: ")
-                    Person.Number.forEach{print(it)}
-                    println(", Email: " + Person.Email)
+                    println("$TempIndex. Firstname: ${Person.FirstName}, Lastname: ${Person.LastName}, Number: ${Person.Number.joinToString(separator = ",")}, Email: ${Person.Email.joinToString(separator = ",")}")
                     TempIndex += 1
                 } // Writes out every contact in the contact list.
                 println("Please type in the individual's surname")
@@ -60,27 +53,27 @@ fun main(args: Array<String>) {
                 var SizeOfPeopleList = 1
                 for(Person in People){
                     if(Person.FirstName.uppercase() == TempFirstName.uppercase() && Person.LastName.uppercase() == TempLastName.uppercase()){ //Checks each person if there is someone with an identical first and lastname.
-                        People.removeAt(SizeOfPeopleList-1) //If there is, the
+                        People.removeAt(SizeOfPeopleList-1) //If there is, the contact will be removed
                         println("The individual has successfully been removed from the contact list")
                         break
                     }
-                    if (SizeOfPeopleList == People.size) {
+                    if (SizeOfPeopleList == People.size) { // if not the error message will be typed out
                         println("The person was unfortunately not found, perhaps you misspelled their surname and/or lastname")
                         break
                     }
-                    SizeOfPeopleList += 1
+                    SizeOfPeopleList++
                 }
             }
             3 ->{
                 var TempIndex: Int = 1
                 for(Person in People) {
-                    println("" + TempIndex + "." + " Firstname: " + Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + " Email: " + Person.Email)
+                    println("$TempIndex. Firstname: ${Person.FirstName}, Lastname: ${Person.LastName}, Number: ${Person.Number.joinToString(separator = ",")}, Email: ${Person.Email.joinToString(separator = ",")}")
                     TempIndex += 1
                 }
                 println("What is the first and last name of the contact that you would like to edit?")
                 var FirstnameAndLastname = readln()
                 for(Person in People){
-                    if(Person.FirstName.uppercase() == FirstnameAndLastname.substring(0, 1).uppercase() && Person.LastName.uppercase() == FirstnameAndLastname.substring(2,3).uppercase()){
+                    if(Person.FirstName.uppercase() == FirstnameAndLastname.substring(0, 1).uppercase() && Person.LastName.uppercase() == FirstnameAndLastname.substring(2,3).uppercase()){ //On substring(1,2) is a jump/empty space
                         do{
                             println("What would you like to change?")
                             println(" 1. Change first name.\n 2. Change last name.\n 3. Change phone number\n 4. Change email address.")
@@ -97,11 +90,22 @@ fun main(args: Array<String>) {
                                     ContinueInLoop = false
                                 }
                                 3 -> {
-                                    for(x in Number){
-
-                                    }
-                                    println("What would you like the new phone number to be?")
                                     var i = 1
+                                    println("The contact has the phone numbers: ${Person.Number.joinToString(separator = ",")}")
+                                    println("Would you like to add, change or delete a phone number?")
+                                    when(readln().lowercase()){ // Maybe a try-catch below
+                                        "add" -> {
+                                                println("What would you like the new number to be?")
+                                                var replaceNumber: String = readln()
+                                        }
+                                        "change" -> {
+
+                                        }
+                                        "delete" -> {
+
+                                        }
+                                    }
+
                                     for(x in Number) {
                                         println(""+ i +x)
                                     }
@@ -125,7 +129,7 @@ fun main(args: Array<String>) {
             4 ->{
                 var TempIndex: Int = 1
                 for(Person in People){
-                    println("" + TempIndex + "." + " Firstname: "+ Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number.forEach{println(it)} + ", Email: " + Person.Email)
+                    println(" ${TempIndex}. Firstname: ${Person.FirstName} Lastname: ${Person.LastName} Number: ${Person.Number.joinToString(separator = ",")} Email: ${Person.Email.joinToString(separator = ",")}")
                     TempIndex += 1
                 }
             }
@@ -163,7 +167,7 @@ fun main(args: Array<String>) {
 fun WriteToFile(People: ArrayList<Person>) {
     val writer = PrintWriter("src/main/kotlin/Contacts.txt")  // Sets the writer's path
     for (Person in People) {
-        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number.joinToString()}  Email: ${Person.Email}\n") //!!!!!!!!!   //Writes out a contact on each line for each person in the people list
+        writer.write("Person: FirstName: ${Person.FirstName} LastName: ${Person.LastName} Number: ${Person.Number.joinToString()} Email: ${Person.Email.joinToString()}\n") //!!!!!!!!!   //Writes out a contact on each line for each person in the people list
     }
     writer.close() // closes/stops the writer
 }
@@ -172,8 +176,34 @@ fun ReadFromFile(People: ArrayList<Person>){
     inputStream.bufferedReader().forEachLine{ //Reads through the txt file's content
         if(it.startsWith("Person: ")) //Checks where a person contact is in the txt file
         {
+            var Index: Int = 0
+            var TempFirstName: String = ""
+            var TempLastName: String = ""
+            var TempNumber = ArrayList<String>()
+            var TempEmail = ArrayList<String>()
             var Array = it.split(' ')
-            People.add(Person(Array[2], Array[4], Array[6], Array[8])) //People.add(FirstName, LastName, Number, Email) adds
+            while (Index < Array.size){
+                if(Array[Index] == "FirstName:"){
+                    TempFirstName = Array[Index+1]
+                }
+                if(Array[Index] == "LastName:"){
+                    TempLastName = Array[Index+1]
+                }
+                if(Array[Index] == "Number:"){
+                    while (Array[Index+1] != "Email:"){
+                        TempNumber.add(NewPhoneNumberWithoutHyphen(Array[Index+1]))
+                        Index++
+                    }
+                }
+                if(Array[Index] == "Email:") {
+                    while (Index+1 != Array.size){
+                        TempEmail.add(Array[Index + 1])
+                        Index++
+                    }
+                }
+                Index++
+            }
+            People.add(Person(TempFirstName, TempLastName, TempNumber, TempEmail))
         }
     }
 }
