@@ -90,7 +90,7 @@ fun main(args: Array<String>) {
                                     ContinueInLoop = false
                                 }
                                 3 -> {
-                                    var i = 1
+                                    var Index = 1
                                     println("The contact has the phone numbers: ${Person.Number.joinToString(separator = ",")}")
                                     println("Would you like to add, change or delete a phone number?")
                                     when(readln().lowercase()){ // Maybe a try-catch below
@@ -102,12 +102,9 @@ fun main(args: Array<String>) {
 
                                         }
                                         "delete" -> {
-
+                                            println("Please type in the number you want to delete.")
+                                            var DeleteNumber: String = readln()
                                         }
-                                    }
-
-                                    for(x in Number) {
-                                        println(""+ i +x)
                                     }
                                     ContinueInLoop = false
                                 }
@@ -130,16 +127,16 @@ fun main(args: Array<String>) {
                 var TempIndex: Int = 1
                 for(Person in People){
                     println(" ${TempIndex}. Firstname: ${Person.FirstName} Lastname: ${Person.LastName} Number: ${Person.Number.joinToString(separator = ",")} Email: ${Person.Email.joinToString(separator = ",")}")
-                    TempIndex += 1
+                    TempIndex++
                 }
             }
             5 ->{
                 var TempIndex: Int = 1
                 val SortedList = People.sortedBy { it.FirstName }
                 for(Person in SortedList){
-                    println("" + TempIndex + "." + " Firstname: " + Person.FirstName + ", Lastname: " + Person.LastName + ", Number: " + Person.Number + ", Email: " + Person.Email)
+                    println("${TempIndex}. Firstname: ${Person.FirstName} Lastname: ${Person.LastName} Number: ${Person.Number.joinToString(separator = ",")} Email: ${Person.Email.joinToString(separator = ",")}")
                 }
-
+                TempIndex++
             }
             6 ->{
                 WriteToFile(People)
