@@ -90,33 +90,83 @@ fun main(args: Array<String>) {
                                     ContinueInLoop = false
                                 }
                                 3 -> {
-                                    var Index = 1
                                     println("The contact has the phone numbers: ${Person.Number.joinToString(separator = ",")}")
                                     println("Would you like to add, change or delete a phone number?")
                                     when(readln().lowercase()){ // Maybe a try-catch below
                                         "add" -> {
-                                                println("What would you like the new number to be?")
-                                                var replaceNumber: String = readln()
+                                            println("What would you like the new number to be?")
+                                            var addNumber: String = readln()
+                                            if(PhoneNumberValidator(addNumber)){
+                                                addNumber = NewPhoneNumberWithoutHyphen(addNumber)
+                                                Person.Number.add(addNumber)
+                                            }
                                         }
                                         "change" -> {
-
+                                            println("Please type in the international number you want to change.")
+                                            var OldNumber: String = readln()
+                                            for(PhoneNumbers in Person.Number){
+                                                if(OldNumber == PhoneNumbers){
+                                                    println("What would you like to change the number to?")
+                                                    var newNumber: String = readln()
+                                                    if(PhoneNumberValidator(newNumber)){
+                                                        newNumber = NewPhoneNumberWithoutHyphen(newNumber)
+                                                        var index: Int = Person.Number.indexOf(newNumber)
+                                                        Person.Number[index] = newNumber
+                                                    }
+                                                    else{
+                                                        println("You have typed an invalid phone number")
+                                                    }
+                                                }
+                                                else{
+                                                    println("The phone number does not exist.")
+                                                }
+                                            }
                                         }
                                         "delete" -> {
-                                            println("Please type in the number you want to delete.")
-                                            var DeleteNumber: String = readln()
+                                            println("Please type in the international number you want to delete.")
+                                            var deleteNumber: String = readln()
+                                            for(PhoneNumbers in Person.Number){
+                                                if(deleteNumber == PhoneNumbers){
+                                                    Person.Number.remove(deleteNumber)
+                                                }
+                                            }
                                         }
                                     }
                                     ContinueInLoop = false
                                 }
                                 4 -> {
-                                    println("These are the emails in this contact: ")
-                                    //for()
-                                    println("What would you like the new email address to be?")
-                                    //Person.Email = readln()
+                                    println("Would you like to add, change or delete an email?")
+                                    when (readln().lowercase()) { // Maybe a try-catch below
+                                        "add" -> {
+                                            println("Please type in the email that you would like to add.")
+                                            var newEmail: String = readln()
+                                            Person.Email.add(newEmail)
+                                        }
+                                        "change" -> {
+                                            println("Please type in the email that you want to change.")
+                                            var oldEmail: String = readln()
+                                            for(emails in Person.Email){
+                                                if(oldEmail == emails) {
+                                                    println("What would you like the new email to be?")
+                                                    var newEmail: String = readln()
+                                                    //if(EmailIsCorrect(newEmail)){
+                                                    val index: Int = Person.Number.indexOf(newEmail)
+                                                    Person.Email[index] = newEmail
+                                                    //}
+                                                }
+                                            }
+                                        }
+                                        "delete" -> {
+                                            println("Please type in the email that you would like to remove.")
+                                            var removeEmail: String = readln()
+                                            for(emails in Person.Email){
+                                                if(removeEmail == emails){
+                                                    Person.Email.remove(removeEmail)
+                                                }
+                                            }
+                                        }
+                                    }
                                     ContinueInLoop = false
-                                }
-                                else -> {
-                                    println("You have typed a invalid number, try again!")
                                 }
                             }
                         }while(ContinueInLoop)
