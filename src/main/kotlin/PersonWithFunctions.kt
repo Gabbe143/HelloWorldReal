@@ -84,10 +84,10 @@ class PersonWithFunctions(var firstName: String, var lastName: String, var numbe
     }
     private fun addPhoneNumber(Person: PersonWithFunctions){
         println("What would you like the new number to be?")
-        var addnumber: String = readln()
-        if(phonenumberValidator(addnumber)){ // checks if the number is valid
-            addnumber = newPhoneNumberWithoutHyphen(addnumber) // removes any possible hyphens
-            Person.number.add(addnumber) // adds the number to the list
+        var addNumber: String = readln()
+        if(phonenumberValidator(addNumber)){ // checks if the number is valid
+            addNumber = newPhoneNumberWithoutHyphen(addNumber) // removes any possible hyphens
+            Person.number.add(addNumber) // adds the number to the list
         }
     }
     private fun changePhoneNumber(Person: PersonWithFunctions){

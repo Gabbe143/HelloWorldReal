@@ -60,7 +60,7 @@ fun phonenumberValidator (phonenumber: String): Boolean{
     if((newPhoneNumber.length in 9..13 && newPhoneNumber.substring(0,1) == "+" && newPhoneNumber.substring(1, newPhoneNumber.length-1).toIntOrNull() != null) || newPhoneNumber.isEmpty()){ // If the phone number is larger or equal to 9 digits and is less or equal to 13 digits, the number contains a '+' at the start, and converting the number from string to int does NOT equal null, OR the number is empty.
         return true // Return true, it's a valid phone number
     }
-    return false // Otherwise return false, it's not valid
+    return false // Otherwise, return false, it's not valid
 }
 fun newPhoneNumberWithoutHyphen(oldPhoneNumber: String): String{
     var newPhoneNumber = oldPhoneNumber
@@ -93,7 +93,7 @@ fun addContactToList(people: ArrayList<PersonWithFunctions>){
     do{
         var continueInLoop = true
         println("And lastly, what is the individual's email?")
-        var newEmail = readln()
+        val newEmail = readln()
         if(newEmail.contains('@')){ // Checks if email contain a '@' symbol.
             emails.add(newEmail) //User input
             continueInLoop = false
