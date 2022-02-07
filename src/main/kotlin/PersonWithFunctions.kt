@@ -67,7 +67,7 @@ class PersonWithFunctions(var firstName: String, var lastName: String, var numbe
     private fun customizePhoneNumber(Person: PersonWithFunctions) {
         println("The contact has the phone numbers: ${Person.number.joinToString(separator = ", ")}") //Writes out the numbers.
         println("Would you like to add, change or delete a phone number?")
-        when (readln().lowercase()) { // Maybe a try-catch below
+        when (readln().lowercase()) { // Switch-cases
             "add" -> {
                 addPhoneNumber(Person)
             }
