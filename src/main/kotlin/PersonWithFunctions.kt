@@ -125,7 +125,7 @@ class PersonWithFunctions(var firstName: String, var lastName: String, var numbe
         do{
             var inLoop = true
             println("Would you like to add, change or delete an email?")
-            when (readln().lowercase()) { // Maybe a try-catch below
+            when (readln().lowercase()) { // Switch-cases
                 "add" -> {
                     addEmail(Person)
                     inLoop = false
