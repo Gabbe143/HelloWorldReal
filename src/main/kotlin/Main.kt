@@ -112,11 +112,11 @@ fun main(args: Array<String>) {
     do{
         println("What would you like to do?")
         println(" 1. Add an individual to the contact list.\n 2. Remove a contact.\n 3. Edit a contact.\n 4. Show the whole contact list.\n 5. Show the contact list in alphabetical order.\n 6. Save the contact list to a file.\n 7. Read in contacts from file.\n 8. Turn off the application\n" )
-        when(readln().toInt()){ //A switch-case where the Int input from the user will determine which case they will go into in the code.
-            1 -> {
+        when(readln()){ //A switch-case where the Int input from the user will determine which case they will go into in the code.
+            "1" -> {
                 addContactToList(people) // adds the contact to the list
             }
-            2 ->{
+            "2" ->{
                 for(Person in people){
                     Person.writesOutTheWholeContactList(Person) //writes out the whole contact list
                 }
@@ -131,7 +131,7 @@ fun main(args: Array<String>) {
                     }
                 }
             }
-            3 ->{
+            "3" ->{
                 for(Person in people) {
                     Person.writesOutTheWholeContactList(Person) // Writes out the whole contact list
                 }
@@ -141,26 +141,26 @@ fun main(args: Array<String>) {
                     Person.editAContact(Person, firstNameAndlastName) // Gives the individual the option to edit a contact
                 }
             }
-            4 ->{
+            "4" ->{
                 for(Person in people) {
                     Person.writesOutTheWholeContactList(Person) // Writes out all the contacts in the list
                 }
             }
-            5 ->{
+            "5" ->{
                 val sortedList = people.sortedBy { it.firstName } // Creates a copy of the list "people" but sorted by firstnames
                 for(Person in sortedList){
                     Person.writesOutTheWholeContactList(Person) // writes out all the contacts in the list
                 }
             }
-            6 ->{
+            "6" ->{
                 writeToFile(people)
                 println("The contacts have successfully been saved in Contacts.txt!")
             }
-            7 ->{
+            "7" ->{
                 readFromFile(people)
                 println("Your contacts have successfully been loaded in!")
             }
-            8 ->{
+            "8" ->{
                 stayInLoop = false
             }
             else ->{

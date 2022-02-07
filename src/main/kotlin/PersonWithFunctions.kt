@@ -29,21 +29,21 @@ class PersonWithFunctions(var firstName: String, var lastName: String, var numbe
                     var continueInLoop = true
                     println("What would you like to change?")
                     println(" 1. Change first name.\n 2. Change last name.\n 3. Change phone number\n 4. Change email address.")
-                    when(readln().toInt()) // Switch-case
+                    when(readln()) // Switch-case
                     {
-                        1 -> {
+                        "1" -> {
                             changeName(Person)
                             continueInLoop = false
                         }
-                        2 -> {
+                        "2" -> {
                             changeLastName(Person)
                             continueInLoop = false
                         }
-                        3 -> {
+                        "3" -> {
                             customizePhoneNumber(Person)
                             continueInLoop = false
                         }
-                        4 -> {
+                        "4" -> {
                             customizeEmail(Person)
                             continueInLoop = false
                         }
