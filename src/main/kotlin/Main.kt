@@ -32,7 +32,7 @@ fun readFromFile(people: ArrayList<PersonWithFunctions>){
                 if(array[index] == "Number:"){ // If the string on the index's place contains "number"
                     while (array[index+1] != "Email:"){ // While the next string does not contain "email"
                         if(array[index+1] != ""){ // While the next string doesn't contain a space (multiple numbers create a space between each other)
-                            tempNumber.add(newPhoneNumberWithoutHyphen(array[index+1])) // Add the number to a tempList of numbers without hyphen.
+                            tempNumber.add(newPhoneNumberWithoutHyphen(array[index+1])) // Add the number to a tempList of numbers without hyphen. - See function above
                         }
                         index++
                     }
@@ -73,15 +73,39 @@ fun newPhoneNumberWithoutHyphen(oldPhoneNumber: String): String{
 fun addContactToList(people: ArrayList<PersonWithFunctions>){
     val numbers = ArrayList<String>()
     val emails = ArrayList<String>()
-    println("What is the person's surname?")
-    val firstName: String = readln() //User input
-    println("What is the person's last name?")
-    val lastName: String = readln() //User input
-    println("What is the individual's phone number? If they don't have a phone number, then leave it blank.")
+    var firstName: String
+    var lastName: String
+    val symbolsAndNumbersToCheckWith = "0123456789/?!:;¤%&/()=??+"
+
+    do{
+        var fakeFirstName = true
+        println("What is the person's surname?")
+        firstName = readln() //User input
+        if(firstName.any{it in symbolsAndNumbersToCheckWith}){ // Checks if the symbols and numbers given in "symbolsAndNumbersToCheckWith" exists anywhere in firstname chars (letters)
+            println("You have typed an invalid firstname, try again.")
+        }
+        else{
+            fakeFirstName = false
+        }
+    }while(fakeFirstName)
+
     do {
+        var fakeLastName = true
+        println("What is the person's last name?")
+        lastName = readln() //User input
+        if(lastName.any{it in symbolsAndNumbersToCheckWith}){ // Checks if the symbols and numbers given in "symbolsAndNumbersToCheckWith" exists anywhere in lastname chars (letters)
+            println("You have typed an invalid lastname, try again.")
+        }
+        else{
+            fakeLastName = false
+        }
+    }while(fakeLastName)
+
+    do {
+        println("What is the individual's phone number? If they don't have a phone number, then leave it blank.")
         var continueInLoop = true
         val phonenumber: String = readln() //User input
-        if(phonenumberValidator(phonenumber)){ //Checks if the phone number is valid
+        if(phonenumberValidator(phonenumber)){ //Checks if the phone number is valid - See function above
             numbers.add(phonenumber) //Adds the number to a list
             continueInLoop = false
         }
@@ -114,18 +138,18 @@ fun main(args: Array<String>) {
         println(" 1. Add an individual to the contact list.\n 2. Remove a contact.\n 3. Edit a contact.\n 4. Show the whole contact list.\n 5. Show the contact list in alphabetical order.\n 6. Save the contact list to a file.\n 7. Read in contacts from file.\n 8. Turn off the application\n" )
         when(readln()){ //A switch-case where the Int input from the user will determine which case they will go into in the code.
             "1" -> {
-                addContactToList(people) // adds the contact to the list
+                addContactToList(people) // adds the contact to the list - see function above
             }
             "2" ->{
                 for(Person in people){
-                    Person.writesOutTheWholeContactList(Person) //writes out the whole contact list
+                    Person.writesOutTheWholeContactList(Person) //writes out the whole contact list - see in PersonWithFunctions
                 }
                 println("Please type in the individual's surname")
                 val tempFirstName: String = readln() // User input
                 println("And please type in the individual's lastName")
                 val tempLastName: String = readln() //User input
                 for(Person in people){
-                    val returnBoolean = Person.removeAContact(Person, people, tempFirstName, tempLastName) // Removes the contact if found
+                    val returnBoolean = Person.removeAContact(Person, people, tempFirstName, tempLastName) // Removes the contact if found - See function in PersonWithFunctions
                     if(returnBoolean){
                         break // Jumps out of the for loop to save time if found individual
                     }
@@ -133,31 +157,31 @@ fun main(args: Array<String>) {
             }
             "3" ->{
                 for(Person in people) {
-                    Person.writesOutTheWholeContactList(Person) // Writes out the whole contact list
+                    Person.writesOutTheWholeContactList(Person) // Writes out the whole contact list - See function in PersonWithFunctions
                 }
                 println("What is the first and last name of the contact that you would like to edit?")
                 val firstNameAndlastName = readln() // User input
                 for(Person in people){
-                    Person.editAContact(Person, firstNameAndlastName) // Gives the individual the option to edit a contact
+                    Person.editAContact(Person, firstNameAndlastName) // Gives the individual the option to edit a contact - See function in PersonWithFunctions
                 }
             }
             "4" ->{
                 for(Person in people) {
-                    Person.writesOutTheWholeContactList(Person) // Writes out all the contacts in the list
+                    Person.writesOutTheWholeContactList(Person) // Writes out all the contacts in the list - See function in PersonWithFunctions
                 }
             }
             "5" ->{
                 val sortedList = people.sortedBy { it.firstName } // Creates a copy of the list "people" but sorted by firstnames
                 for(Person in sortedList){
-                    Person.writesOutTheWholeContactList(Person) // writes out all the contacts in the list
+                    Person.writesOutTheWholeContactList(Person) // writes out all the contacts in the list - See function in PersonWithFunctions
                 }
             }
             "6" ->{
-                writeToFile(people)
+                writeToFile(people) // See function above
                 println("The contacts have successfully been saved in Contacts.txt!")
             }
             "7" ->{
-                readFromFile(people)
+                readFromFile(people) // See function above
                 println("Your contacts have successfully been loaded in!")
             }
             "8" ->{
@@ -170,6 +194,6 @@ fun main(args: Array<String>) {
     }while(stayInLoop)
     println("You have successfully turned off the application, all of the contacts will be automatically saved.")
     println("Thank you for using our application! Have a lovely continue, goodbye!")
-    writeToFile(people)
+    writeToFile(people) // See function above
     println("Program arguments: ${args.joinToString()}")
 }

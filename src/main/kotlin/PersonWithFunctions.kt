@@ -24,7 +24,7 @@ class PersonWithFunctions(var firstName: String, var lastName: String, var numbe
 
     fun editAContact(Person: PersonWithFunctions, firstNameAndlastName: String){
         println("What is the first and last name of the contact that you would like to edit?")
-            if(Person.firstName.uppercase() == firstNameAndlastName.substring(0, 1).uppercase() && Person.lastName.uppercase() == firstNameAndlastName.substring(2,3).uppercase()){ //On substring(1,2) is a jump/empty space
+            if(Person.firstName.uppercase() == firstNameAndlastName.substring(0, 1).uppercase() && Person.lastName.uppercase() == firstNameAndlastName.substring(2,3).uppercase()){ //Checks if there is anyone with an alike first- and lastname as the given one by the individual. On substring(1,2) is a jump/empty space
                 do{
                     var continueInLoop = true
                     println("What would you like to change?")
