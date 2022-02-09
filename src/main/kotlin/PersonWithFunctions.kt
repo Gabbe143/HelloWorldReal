@@ -15,7 +15,7 @@ class PersonWithFunctions(var firstName: String, var lastName: String, var numbe
             return true
         }
         else if(sizeOfpeopleList == people.size) { // if not the error message will be typed out (if the none of the people have those first and last names)
-            println("The person was unfortunately not found, perhaps you misspelled their surname and/or lastName")
+            println("The person was unfortunately not found, perhaps you misspelled their firstname and/or lastName")
             return true
         }
         sizeOfpeopleList++

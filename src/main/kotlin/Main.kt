@@ -79,7 +79,7 @@ fun addContactToList(people: ArrayList<PersonWithFunctions>){
 
     do{
         var fakeFirstName = true
-        println("What is the person's surname?")
+        println("What is the person's firstname?")
         firstName = readln() //User input
         if(firstName.any{it in symbolsAndNumbersToCheckWith}){ // Checks if the symbols and numbers given in "symbolsAndNumbersToCheckWith" exists anywhere in firstname chars (letters)
             println("You have typed an invalid firstname, try again.")
@@ -144,7 +144,7 @@ fun main(args: Array<String>) {
                 for(Person in people){
                     Person.writesOutTheWholeContactList(Person) //writes out the whole contact list - see in PersonWithFunctions
                 }
-                println("Please type in the individual's surname")
+                println("Please type in the individual's firstname")
                 val tempFirstName: String = readln() // User input
                 println("And please type in the individual's lastName")
                 val tempLastName: String = readln() //User input
